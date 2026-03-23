@@ -1,0 +1,66 @@
+{
+  "intents": [
+    {
+      "keywords": ["hello", "hi", "hey", "greetings"],
+      "responses": [
+        "Hello! I'm Bhautik's portfolio assistant. How can I help you?",
+        "Hi there! Welcome to Bhautik's portfolio. What would you like to know?",
+        "Hey! I'm here to help. What information are you looking for?"
+      ]
+    },
+    {
+      "keywords": ["skills", "technologies", "tech-stack", "expertise"],
+      "responses": [
+        "Bhautik specializes in React.js, Node.js, and MongoDB. He's also proficient in JavaScript, TypeScript, HTML, CSS, and Tailwind CSS.",
+        "Bhautik's tech stack includes: Frontend (React, Tailwind), Backend (Node.js, Express), Databases (MongoDB), and modern JavaScript.",
+        "He works with React for frontend development, Node.js and Express for backend, and MongoDB for databases. Also skilled in TypeScript and Tailwind CSS!"
+      ]
+    },
+    {
+      "keywords": ["projects", "portfolio", "work", "portfolio experience"],
+      "responses": [
+        "You can explore Bhautik's projects in the Projects section. Each project includes details about the tech stack and links to GitHub and live demos!",
+        "Head over to the Projects page to see what Bhautik has built. There are several full-stack applications showcasing his skills.",
+        "Check out the Projects section to see Bhautik's work. He's built multiple web applications with React, Node.js, and MongoDB!"
+      ]
+    },
+    {
+      "keywords": ["contact", "reach", "email", "hire", "work together"],
+      "responses": [
+        "You can contact Bhautik via the Contact Form on the website or email him at vachhanib485@gmail.com. Phone: +91 6353904121",
+        "Use the Contact page to send a message to Bhautik. You can also reach him directly at vachhanib485@gmail.com or call +91 6353904121.",
+        "Head to the Contact section to get in touch. Email: vachhanib485@gmail.com, Phone: +91 6353904121"
+      ]
+    },
+    {
+      "keywords": ["about", "background", "education", "resume"],
+      "responses": [
+        "Bhautik is a passionate Full Stack Developer pursuing BCA from Noble University Junagadh. He focuses on building scalable and user-friendly web applications.",
+        "He's an enthusiastic MERN Stack developer with strong academic performance. Check the About page for more details about his education and experience!",
+        "Bhautik is a BCA student with expertise in modern web development. You can download his resume from the Home page to learn more!"
+      ]
+    },
+    {
+      "keywords": ["location", "where"],
+      "responses": [
+        "Bhautik is based in Junagadh, Gujarat, India.",
+        "He's located in Junagadh, Gujarat. Always open to remote opportunities though!"
+      ]
+    },
+    {
+      "keywords": ["github", "github-profile", "linkedin"],
+      "responses": [
+        "Check out Bhautik's GitHub: https://github.com/BhautikPtl and LinkedIn: https://www.linkedin.com/in/bhautik-vachhani-427540304",
+        "GitHub: https://github.com/BhautikPtl | LinkedIn: https://www.linkedin.com/in/bhautik-vachhani-427540304 - Follow for updates!"
+      ]
+    },
+    {
+      "keywords": ["thanks", "thank you", "appreciate"],
+      "responses": [
+        "You're welcome! Feel free to ask me anything else or reach out to Bhautik directly! 😊",
+        "Glad I could help! Anything else you'd like to know?"
+      ]
+    }
+  ],
+  "fallback": "I'm not sure about that.  Please contact Bhautik directly at vachhanib485@gmail.com or use the Contact form. 😊"
+}

@@ -1,0 +1,192 @@
+%PDF-1.4
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/Resources <<
+/Font <<
+/F1 4 0 R
+/F2 5 0 R
+>>
+>>
+/MediaBox [0 0 612 792]
+/Contents 6 0 R
+>>
+endobj
+4 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+5 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica-Bold
+>>
+endobj
+6 0 obj
+<<
+/Length 1850
+>>
+stream
+BT
+/F2 24 Tf
+50 750 Td
+(BHAUTIK VACHHANI) Tj
+ET
+BT
+/F1 12 Tf
+50 720 Td
+(Full-Stack Developer | BCA Student) Tj
+ET
+BT
+/F1 10 Tf
+50 700 Td
+(Email: bhautik@example.com | Phone: +91-XXXXXXXXXX | LinkedIn: linkedin.com/in/bhautik) Tj
+ET
+BT
+/F1 10 Tf
+50 685 Td
+(Location: Junagadh, Gujarat, India) Tj
+ET
+BT
+/F2 16 Tf
+50 650 Td
+(PROFESSIONAL SUMMARY) Tj
+ET
+BT
+/F1 11 Tf
+50 630 Td
+(Full-Stack Developer with expertise in building scalable web applications using modern technologies.) Tj
+ET
+BT
+/F1 11 Tf
+50 615 Td
+(Passionate about creating intuitive user interfaces and efficient backend systems. Currently pursuing BCA at) Tj
+ET
+BT
+/F1 11 Tf
+50 600 Td
+(Noble University Junagadh with a strong focus on Full-Stack Development.) Tj
+ET
+BT
+/F2 16 Tf
+50 550 Td
+(TECHNICAL SKILLS) Tj
+ET
+BT
+/F1 11 Tf
+50 530 Td
+(Frontend: React, Vite, Tailwind CSS, Framer Motion, HTML/CSS, JavaScript ES6+) Tj
+ET
+BT
+/F1 11 Tf
+50 515 Td
+(Backend: Node.js, Express.js, REST APIs, JWT Authentication, Multer) Tj
+ET
+BT
+/F1 11 Tf
+50 500 Td
+(Database: MongoDB, Mongoose ODM) Tj
+ET
+BT
+/F1 11 Tf
+50 485 Td
+(Tools: Git/GitHub, Figma, VS Code, Postman) Aj
+ET
+BT
+/F1 11 Tf
+50 470 Td
+(Languages: JavaScript, Python, HTML/CSS) Tj
+ET
+BT
+/F2 16 Tf
+50 420 Td
+(PROJECTS) Tj
+ET
+BT
+/F1 11 Tf
+50 400 Td
+(Personal Portfolio Platform - Full-Stack Developer Platform with Cinematic Animations) Tj
+ET
+BT
+/F1 10 Tf
+50 385 Td
+(Technologies: React, Vite, Tailwind CSS, Framer Motion, Node.js, Express, MongoDB, Python FastAPI) Tj
+ET
+BT
+/F1 10 Tf
+50 370 Td
+(Features: Premium UI with glassmorphism, admin dashboard, JWT authentication, chatbot integration) Tj
+ET
+BT
+/F2 16 Tf
+50 320 Td
+(EDUCATION) Tj
+ET
+BT
+/F1 11 Tf
+50 300 Td
+(Bachelor of Computer Applications (BCA)) Tj
+ET
+BT
+/F1 10 Tf
+50 285 Td
+(Noble University, Junagadh | Graduation: 2025) Tj
+ET
+BT
+/F2 16 Tf
+50 235 Td
+(ACHIEVEMENTS) Tj
+ET
+BT
+/F1 11 Tf
+50 215 Td
+(- Developed 10+ Full-Stack projects from concept to deployment) Tj
+ET
+BT
+/F1 11 Tf
+50 200 Td
+(- Expertise in premium UI/UX design with Framer Motion animations) Tj
+ET
+BT
+/F1 11 Tf
+50 185 Td
+(- Strong foundation in REST API design and database management) Tj
+ET
+ET
+endstream
+endobj
+xref
+0 7
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000262 00000 n 
+0000000341 00000 n 
+0000000423 00000 n 
+trailer
+<<
+/Size 7
+/Root 1 0 R
+>>
+startxref
+2324
+%%EOF
