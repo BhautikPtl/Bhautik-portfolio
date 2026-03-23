@@ -20,7 +20,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: '*', // Allow all for debugging, or specify 'http://localhost:5173'
+  origin: '*', // Allow all for debugging, or specify 'http://localhost:5173','https://bhautik-portfolio.onrender.com'
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
