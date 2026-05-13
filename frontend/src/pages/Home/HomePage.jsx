@@ -6,6 +6,7 @@ import { Download, Github, Linkedin, ArrowRight, Terminal } from 'lucide-react';
 import { PORTFOLIO_DATA } from '../../utils/constants';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '../../hooks/useToast';
+import resumePDF from '../../assets/bhautik.pdf';
 
 const TerminalTyping = ({ commands }) => {
   const [displayedText, setDisplayedText] = useState('');
@@ -57,14 +58,14 @@ export const HomePage = () => {
     `echo $status\nOpen to Opportunities ✅`,
   ];
 
-  const handleDownloadResume = () => {
+  const handleDownloadResume = async () => {
     try {
       const link = document.createElement('a');
-      link.href = '/resume.pdf';
-      link.download = `Bhautik_Vachhani_Resume.pdf`;
+      link.href = resumePDF;
+      link.download = 'Bhautik Vachhani Resume.pdf';
       document.body.appendChild(link);
       link.click();
-      document.body.removeChild(link);
+      link.remove();
       showToast('Resume downloaded successfully! ✅', 'success');
     } catch (error) {
       showToast('Failed to download resume', 'error');

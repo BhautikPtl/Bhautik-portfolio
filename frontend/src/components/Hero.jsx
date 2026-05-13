@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { TypeAnimation } from 'react-type-animation';
 import { Download, ExternalLink } from 'lucide-react';
+import resumePDF from '../assets/bhautik.pdf';
 
 const Hero = () => {
   return (
@@ -69,8 +70,8 @@ const Hero = () => {
 
           <div className="flex flex-wrap gap-4 justify-center md:justify-start">
             <motion.a
-              href="/resume.pdf"
-              download
+              href={resumePDF}
+              download="Bhautik_Vachhani_Resume.pdf"
               whileHover={{ scale: 1.05, boxShadow: "0 0 20px rgba(6, 182, 212, 0.4)" }}
               whileTap={{ scale: 0.95 }}
               className="px-8 py-4 bg-primary text-background font-bold rounded-xl flex items-center gap-2 transition-all cursor-pointer"
