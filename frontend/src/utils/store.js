@@ -1,7 +1,12 @@
 import { create } from 'zustand';
 
 const useStore = create((set) => ({
-  theme: 'dark',
+  theme: localStorage.getItem('theme') || 'dark',
+  toggleTheme: () => set((state) => {
+    const newTheme = state.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', newTheme);
+    return { theme: newTheme };
+  }),
   
   isLoggedIn: !!localStorage.getItem('token'),
   token: localStorage.getItem('token'),

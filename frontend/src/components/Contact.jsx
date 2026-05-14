@@ -25,7 +25,7 @@ const Contact = () => {
     <section id="contact" className="py-20 bg-background/50">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto glass rounded-3xl md:rounded-[2.5rem] overflow-hidden grid md:grid-cols-2 border border-white/5">
-          <div className="p-8 md:p-10 bg-gradient-to-br from-primary to-accent text-background flex flex-col justify-between">
+          <div className="p-8 md:p-10 bg-gradient-to-br from-primary to-accent text-background flex flex-col justify-between text-center md:text-left">
             <div>
               <h2 className="text-4xl font-bold mb-6 italic">Let's connect</h2>
               <p className="text-background/80 mb-8">

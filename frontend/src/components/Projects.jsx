@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { ExternalLink, Github, ArrowRight, Code2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { projectsAPI } from '../utils/api';
@@ -22,7 +22,7 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 bg-background/50">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-4">
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end mb-16 gap-4 text-center md:text-left">
           <div>
             <h2 className="text-4xl font-bold mb-2">Selected Projects</h2>
             <p className="text-slate-400">Hand-picked selection of my recent works.</p>
@@ -32,7 +32,7 @@ const Projects = () => {
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {projects.length > 0 ? projects.map((project, index) => (
             <ProjectCard key={project._id} project={project} index={index} />
           )) : (
@@ -48,22 +48,55 @@ const Projects = () => {
 };
 
 const ProjectCard = ({ project, index }) => {
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
+
+  const mouseXSpring = useSpring(x);
+  const mouseYSpring = useSpring(y);
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["10deg", "-10deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-10deg", "10deg"]);
+
+  const handleMouseMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const width = rect.width;
+    const height = rect.height;
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const xPct = mouseX / width - 0.5;
+    const yPct = mouseY / height - 0.5;
+    x.set(xPct);
+    y.set(yPct);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.1 }}
-      className="glass-card group p-8 flex flex-col h-full border border-white/5"
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateY,
+        rotateX,
+        transformStyle: "preserve-3d",
+      }}
+      className="glass-card group p-8 flex flex-col h-full border border-white/5 cursor-default"
     >
-      <div className="flex justify-between items-start mb-6">
+      <div style={{ transform: "translateZ(50px)" }} className="flex justify-between items-start mb-6">
         <div className="w-14 h-14 bg-cyan-500/10 rounded-2xl flex items-center justify-center text-cyan-500 border border-cyan-500/20 group-hover:scale-110 transition-transform duration-500">
           <Code2 size={28} />
         </div>
       </div>
 
-      <h3 className="text-2xl font-black mb-3 group-hover:text-cyan-400 transition-colors uppercase tracking-tight">{project.title}</h3>
-      <p className="text-slate-400 text-sm line-clamp-3 mb-8 leading-relaxed">
+      <h3 style={{ transform: "translateZ(40px)" }} className="text-2xl font-black mb-3 group-hover:text-cyan-400 transition-colors uppercase tracking-tight">{project.title}</h3>
+      <p style={{ transform: "translateZ(30px)" }} className="text-slate-400 text-sm line-clamp-3 mb-8 leading-relaxed">
         {project.description}
       </p>
 

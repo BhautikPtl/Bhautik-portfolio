@@ -24,7 +24,7 @@ const Certificates = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="flex flex-col md:flex-row md:items-center gap-6 mb-16 text-center md:text-left">
-          <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tight">Certifications</h2>
+          <h2 className="text-4xl font-bold mb-2">Certifications</h2>
           <div className="flex-1 h-px bg-gradient-to-r from-primary/30 to-transparent hidden md:block"></div>
         </div>
 

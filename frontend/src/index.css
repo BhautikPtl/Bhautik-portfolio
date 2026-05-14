@@ -1,21 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Fira+Code:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+  color-scheme: dark;
+}
+
 :root {
   /* Permanent Cyber-Dark Theme */
-  --background: #0a0a0a;
-  --foreground: #f0f2f5;
-  --card: #111111;
+  --background: #020617;
+  --foreground: #f8fafc;
+  --card: #0f172a;
   --primary: #06b6d4;
   --accent: #14b8a6;
   --border: rgba(255, 255, 255, 0.05);
-  --glass-bg: rgba(10, 10, 10, 0.7);
-  --scrollbar-thumb: #1a1a1a;
+  --glass-bg: rgba(2, 6, 23, 0.7);
+  --scrollbar-thumb: #1e293b;
 
-  --gradient-hero: linear-gradient(135deg, #0a0a0a 0%, #0f172a 100%);
+  --gradient-hero: linear-gradient(135deg, #020617 0%, #0f172a 100%);
   --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #14b8a6 100%);
 }
 
@@ -28,7 +33,7 @@
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Outfit', sans-serif;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -69,8 +74,56 @@ code,
 }
 
 .mesh-gradient {
-  background: radial-gradient(ellipse at 20% 0%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 100%, rgba(22, 217, 185, 0.06) 0%, transparent 50%);
+  background-image:
+    radial-gradient(at 0% 0%, hsla(180, 100%, 50%, 0.03) 0px, transparent 50%),
+    radial-gradient(at 50% 0%, hsla(240, 100%, 50%, 0.03) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, hsla(280, 100%, 50%, 0.03) 0px, transparent 50%);
+}
+
+.bg-glow {
+  position: absolute;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+  filter: blur(80px);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.bg-grid-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+.bg-noise {
+  position: fixed;
+  inset: 0;
+  opacity: 0.015;
+  pointer-events: none;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Cursor Styles */
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--primary);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+}
+
+.cursor-outline {
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.1s ease, border-color 0.3s ease;
 }
 
 .card-hover {
