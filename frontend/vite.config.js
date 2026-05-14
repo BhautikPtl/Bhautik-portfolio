@@ -3,6 +3,9 @@ import react from '@vitejs/plugin-react'
 
 export default defineConfig({
   plugins: [react()],
+  esbuild: {
+    drop: ['console', 'debugger'],
+  },
   server: {
     port: 5173,
     proxy: {
@@ -23,13 +26,6 @@ export default defineConfig({
       }
     },
     chunkSizeWarningLimit: 1000,
-    cssCodeSplit: true,
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: true,
-        drop_debugger: true
-      }
-    }
+    cssCodeSplit: true
   }
 })
