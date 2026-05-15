@@ -42,8 +42,12 @@ export const AboutPage = () => {
 
             <motion.div variants={fadeInUp} className="relative">
               <div className="w-full aspect-square rounded-2xl bg-gradient-glow p-0.5">
-                <div className="w-full h-full rounded-2xl bg-space-dark flex items-center justify-center text-9xl">
-                  🚀
+                <div className="w-full h-full rounded-2xl bg-space-dark overflow-hidden flex items-center justify-center">
+                  <img 
+                    src="/avatars.png" 
+                    alt="Avatar" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </motion.div>
