@@ -31,45 +31,99 @@ const Education = () => {
   };
 
   return (
-    <section id="education" className="py-20 relative overflow-hidden bg-background/50">
+    <section id="education" className="py-24 relative overflow-hidden">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(6,182,212,0.1)_0%,transparent_50%)] pointer-events-none" />
+      
       <div className="container mx-auto px-6 relative z-10">
-        <div className="flex flex-col gap-4 mb-16 text-center md:text-left">
-          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 justify-center md:justify-start">
-            <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight">Academic Performance</h2>
-            <div className="hidden md:block h-px flex-1 bg-gradient-to-r from-white/10 to-transparent"></div>
-          </div>
-          <p className="text-lg md:text-xl text-slate-400 font-medium italic">Pursuing BCA @ Noble University, Junagadh</p>
+        {/* Header */}
+        <div className="text-center mb-24 relative">
+          {/* Background Glow */}
+          <div className="absolute inset-0 top-1/2 -translate-y-1/2 h-40 bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-3xl pointer-events-none" />
+          
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="relative w-full"
+          >
+            <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight whitespace-normal">
+              Academic <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg">Performance</span>
+            </h2>
+          </motion.div>
+          
+          {/* Animated Line */}
+          <motion.div 
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ delay: 0.3, duration: 1, ease: "easeInOut" }}
+            className="h-1.5 w-48 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto rounded-full shadow-[0_0_20px_rgba(168,85,247,0.8)]"
+          />
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-6 text-lg text-gray-300 font-semibold tracking-wide"
+          >
+            Pursuing BCA @ Noble University, Junagadh
+          </motion.p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {semesters.map((sem, index) => (
             <motion.div
               key={sem.title}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.15 }}
-              className="glass-card group p-8 flex flex-col items-center justify-center text-center border border-white/5 rounded-[2rem] hover:border-white/20 transition-all duration-300"
+              transition={{ delay: index * 0.08 }}
+              whileHover={{ rotateY: 5, rotateX: -5, z: 100 }}
+              className="group relative"
             >
-              <div className={`w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 border ${getColorClasses(sem.color)}`}>
-                {sem.icon}
-              </div>
-              <h3 className="text-2xl font-black mb-2 uppercase tracking-tight">{sem.title}</h3>
-              <div className="flex items-end gap-2 text-slate-400 font-medium h-12">
-                <span className={`text-4xl font-black leading-none ${getSgpaColor(sem.color)} ${sem.isCurrent ? 'text-3xl mt-2' : ''}`}>{sem.sgpa}</span>
-                {!sem.isCurrent && <span className="text-sm uppercase tracking-widest pb-1">SGPA</span>}
+              {/* Card Glow Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-pink-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 blur-lg" />
+              
+              {/* Card */}
+              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-5 flex flex-col items-center justify-center text-center min-h-[160px] hover:border-purple-400/50 transition-[border-color,background,box-shadow] duration-200 group-hover:from-white/15 group-hover:to-white/8 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]">
+                
+                {/* Gradient Line Top */}
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                
+                {/* Icon */}
+                <div className={`mb-3 p-3 rounded-xl transition-[background-color,transform] duration-200 group-hover:scale-120 group-hover:rotate-12 border ${getColorClasses(sem.color)}`}>
+                  {sem.icon}
+                </div>
+                
+                {/* Semester Title */}
+                <h3 className="text-lg font-black text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors duration-200">
+                  {sem.title}
+                </h3>
+                
+                {/* SGPA */}
+                <div className={`text-2xl font-black leading-none ${getSgpaColor(sem.color)}`}>
+                  {sem.sgpa}
+                </div>
+                {!sem.isCurrent && <span className="text-xs uppercase tracking-widest text-gray-400 mt-1">SGPA</span>}
               </div>
             </motion.div>
           ))}
         </div>
 
-        <div className="mt-20 text-center md:text-left">
-          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-6 mb-12 justify-center md:justify-start">
-            <h3 className="text-2xl md:text-3xl font-black uppercase tracking-tight text-white/50">MERN Stack Specialization</h3>
-            <div className="hidden md:block h-px flex-1 bg-gradient-to-r from-white/5 to-transparent"></div>
-          </div>
+        <div className="mt-20 text-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="mb-12"
+          >
+            <h3 className="text-3xl md:text-4xl font-black mb-4 tracking-tighter">
+              MERN Stack <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Specialization</span>
+            </h3>
+          </motion.div>
           
-          <div className="flex flex-wrap justify-center md:justify-start gap-4">
+          <div className="flex flex-wrap justify-center gap-4">
             {[
               'MongoDB', 'Express.js', 'React.js', 'Node.js', 
               'Tailwind CSS', 'Full-Stack Architecture'
@@ -80,7 +134,8 @@ const Education = () => {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: idx * 0.1 }}
-                className="px-3 py-1.5 md:px-6 md:py-3 text-sm md:text-base bg-white/5 border border-white/10 rounded-lg md:rounded-xl text-slate-300 font-medium hover:bg-white/10 hover:border-white/20 transition-all cursor-default"
+                whileHover={{ scale: 1.1, y: -5 }}
+                className="px-4 py-2.5 md:px-6 md:py-3 text-sm md:text-base bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl text-white font-semibold hover:border-purple-400/50 transition-all duration-200 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]"
               >
                 {course}
               </motion.div>

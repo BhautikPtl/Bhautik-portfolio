@@ -25,11 +25,51 @@ const Home = () => {
     <main className="relative mesh-gradient min-h-screen">
       <Navbar />
       <Hero />
+      
+      {/* Divider Line */}
+      <div className="relative py-12">
+        <div className="container mx-auto px-6">
+          <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent"></div>
+        </div>
+      </div>
+      
       <Suspense fallback={<SectionLoader />}>
         <Skills />
+        
+        {/* Divider Line */}
+        <div className="relative py-12">
+          <div className="container mx-auto px-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-purple-500/50 to-transparent"></div>
+          </div>
+        </div>
+        
         <Education />
+        
+        {/* Divider Line */}
+        <div className="relative py-12">
+          <div className="container mx-auto px-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-blue-500/50 to-transparent"></div>
+          </div>
+        </div>
+        
         <Projects />
+        
+        {/* Divider Line */}
+        <div className="relative py-12">
+          <div className="container mx-auto px-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+          </div>
+        </div>
+        
         <Certificates />
+        
+        {/* Divider Line */}
+        <div className="relative py-12">
+          <div className="container mx-auto px-6">
+            <div className="h-px bg-gradient-to-r from-transparent via-red-500/50 to-transparent"></div>
+          </div>
+        </div>
+        
         <Contact />
         <Footer />
       </Suspense>
