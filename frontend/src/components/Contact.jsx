@@ -71,25 +71,26 @@ const Contact = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="group relative"
+              whileHover={{ y: -5 }}
             >
               {/* Card Glow Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500/30 to-pink-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 blur-lg" />
+              <div className="absolute inset-0 bg-gradient-to-br from-red-500/30 to-pink-500/20 rounded-2xl opacity-0 transition-opacity duration-200 blur-lg" />
               
               {/* Card */}
-              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-8 flex flex-col justify-between hover:border-red-400/50 transition-[border-color,background] duration-200 group-hover:from-white/15 group-hover:to-white/8">
+              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-8 flex flex-col justify-between transition-[border-color,background,box-shadow] duration-200 hover:border-red-400/60 hover:shadow-[0_12px_48px_rgba(239,68,68,0.4)]" >
                 
                 {/* Gradient Line Top */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-400 via-pink-400 to-orange-400 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-400 via-pink-400 to-orange-400 rounded-t-2xl opacity-0 transition-opacity duration-200" />
                 
                 <div>
-                  <h3 className="text-2xl font-black mb-8 group-hover:text-red-300 transition-colors">Get in Touch</h3>
+                  <h3 className="text-2xl font-black mb-8 transition-colors">Get in Touch</h3>
                   
                   <div className="space-y-6">
                     <motion.div 
                       whileHover={{ x: 5 }}
                       className="flex items-start gap-4 cursor-default"
                     >
-                      <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-red-400 border border-red-500/30 flex-shrink-0 group-hover:scale-110 transition-transform duration-200">
+                      <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-red-400 border border-red-500/30 flex-shrink-0 transition-transform duration-200">
                         <Mail size={20} />
                       </div>
                       <div>
@@ -102,7 +103,7 @@ const Contact = () => {
                       whileHover={{ x: 5 }}
                       className="flex items-start gap-4 cursor-default"
                     >
-                      <div className="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center text-pink-400 border border-pink-500/30 flex-shrink-0 group-hover:scale-110 transition-transform duration-200">
+                      <div className="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center text-pink-400 border border-pink-500/30 flex-shrink-0 transition-transform duration-200">
                         <User size={20} />
                       </div>
                       <div>
@@ -143,15 +144,16 @@ const Contact = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
               className="group relative"
+              whileHover={{ y: -5 }}
             >
               {/* Card Glow Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500/30 to-pink-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 blur-lg" />
+              <div className="absolute inset-0 bg-gradient-to-br from-red-500/30 to-pink-500/20 rounded-2xl opacity-0 transition-opacity duration-200 blur-lg" />
               
               {/* Card */}
-              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-8 hover:border-red-400/50 transition-[border-color,background] duration-200 group-hover:from-white/15 group-hover:to-white/8">
+              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-8 transition-[border-color,background,box-shadow] duration-200 hover:border-red-400/60 hover:shadow-[0_12px_48px_rgba(239,68,68,0.4)]" >
                 
                 {/* Gradient Line Top */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-400 via-pink-400 to-orange-400 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-400 via-pink-400 to-orange-400 rounded-t-2xl opacity-0 transition-opacity duration-200" />
                 
                 {status === 'success' ? (
                   <motion.div 

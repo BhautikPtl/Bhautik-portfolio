@@ -7,7 +7,8 @@ const Education = () => {
     { title: 'Semester 1', sgpa: '7.42', icon: <BookOpen size={24} />, color: 'blue' },
     { title: 'Semester 2', sgpa: '6.83', icon: <Award size={24} />, color: 'purple' },
     { title: 'Semester 3', sgpa: '7.52', icon: <GraduationCap size={24} />, color: 'cyan' },
-    { title: 'Semester 4', sgpa: 'Current', icon: <BookOpen size={24} />, color: 'emerald', isCurrent: true }
+    { title: 'Semester 4', sgpa: '7.64', icon: <BookOpen size={24} />, color: 'emerald' },
+    { title: 'Semester 5', sgpa: 'Current', icon: <Award size={24} />, color: 'pink', isCurrent: true }
   ];
 
   const getColorClasses = (color) => {
@@ -16,6 +17,7 @@ const Education = () => {
       purple: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
       cyan: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
       emerald: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+      pink: 'bg-pink-500/10 text-pink-400 border-pink-500/20',
     };
     return colors[color] || colors.blue;
   };
@@ -26,6 +28,7 @@ const Education = () => {
       purple: 'text-purple-400',
       cyan: 'text-cyan-400',
       emerald: 'text-emerald-400',
+      pink: 'text-pink-400',
     };
     return colors[color] || colors.blue;
   };

@@ -23,13 +23,14 @@ const CustomCursor = () => {
 
     isTouchDeviceRef.current = isTouchDevice();
 
-    // If touch device, don't render cursor
-    if (isTouchDeviceRef.current) {
+    // Only render cursor on mobile/touch devices
+    if (!isTouchDeviceRef.current) {
       return;
     }
 
     const handleMouseMove = (e) => {
-      posRef.current = { x: e.clientX, y: e.clientY };
+      // Position cursor in top-left corner on mobile
+      posRef.current = { x: 30, y: 30 };
     };
 
     const handleMouseOver = (e) => {
@@ -80,8 +81,8 @@ const CustomCursor = () => {
     };
   }, []);
 
-  // Don't render on touch devices or tablets
-  if (isTouchDeviceRef.current) {
+  // Only render on touch devices or tablets
+  if (!isTouchDeviceRef.current) {
     return null;
   }
 
