@@ -11,7 +11,7 @@ const skills = [
   { name: 'JavaScript', level: 'Expert', icon: <Globe size={32} className="text-yellow-400" /> },
   { name: 'TypeScript', level: 'Advanced', icon: <Zap size={32} className="text-purple-400" /> },
   { name: 'Tailwind CSS', level: 'Expert', icon: <Layout size={32} className="text-sky-400" /> },
-  { name: 'Next.js', level: 'Advanced', icon: <Smartphone size={32} className="text-white" /> },
+  
 ];
 
 const Skills = () => {
