@@ -13,7 +13,7 @@ const Footer = () => {
           {[
             { icon: <Github size={20} />, href: 'https://github.com/BhautikPtl' },
             { icon: <Linkedin size={20} />, href: 'https://www.linkedin.com/in/bhautik-vachhani-427540304' },
-            { icon: <Instagram size={20} />, href: '#' }
+            { icon: <Instagram size={20} />, href: 'https://www.instagram.com/ptl_bhautik_/' }
           ].map((social, i) => (
             <a 
               key={i} 
