@@ -166,9 +166,6 @@ const Hero = () => {
             grid-template-columns: 1fr !important;
             gap: 40px !important;
           }
-          #home .term-card {
-            order: -1;
-          }
         }
       `}</style>
     </section>
