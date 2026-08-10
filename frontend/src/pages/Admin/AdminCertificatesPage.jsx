@@ -2,9 +2,25 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Button, Container, Section } from '../../components/ui/Button';
 import { certificatesAPI } from '../../utils/api';
-import { Trash2, Edit2, FileText } from 'lucide-react';
+import { Trash2, Edit2 } from 'lucide-react';
 import { useToast } from '../../hooks/useToast';
 import { Modal } from '../../components/ui/Modal';
+
+const getInitials = (title = '') => {
+  return title
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word[0])
+    .join('')
+    .toUpperCase();
+};
+
+const AVATAR_COLORS = [
+  'from-fuchsia-400 to-violet-400',
+  'from-sky-400 to-cyan-400',
+  'from-emerald-400 to-teal-400',
+  'from-amber-400 to-orange-400',
+];
 
 export const AdminCertificatesPage = () => {
   const [certificates, setCertificates] = useState([]);
@@ -14,7 +30,7 @@ export const AdminCertificatesPage = () => {
   const [formData, setFormData] = useState({
     title: '', issuer: '', date: '', image: null
   });
-  const { toasts, showToast } = useToast();
+  const { showToast } = useToast();
 
   useEffect(() => {
     fetchCertificates();
@@ -96,44 +112,44 @@ export const AdminCertificatesPage = () => {
           ) : certificates.length === 0 ? (
             <div className="text-center py-12 text-gray-400">No certificates yet. Add one!</div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {certificates.map(cert => (
+            <div className="space-y-4">
+              {certificates.map((cert, index) => (
                 <motion.div
                   key={cert._id}
-                  initial={{ opacity: 0 }}
+                  initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1 }}
-                  className="bg-space-dark/40 border border-neon-purple/20 rounded-xl overflow-hidden group"
+                  whileHover={{ y: -2 }}
+                  className="bg-space-dark/40 backdrop-blur-lg border border-neon-purple/20 rounded-3xl p-4 sm:p-5"
                 >
-                  {cert.image && (cert.image.toLowerCase().endsWith('.pdf') ? (
-                    <div className="w-full h-48 flex items-center justify-center bg-slate-800">
-                      <FileText size={48} className="text-cyan-500" />
+                  <div className="flex items-center gap-4 sm:gap-5">
+                    <div
+                      className={`h-14 w-14 sm:h-16 sm:w-16 rounded-2xl bg-gradient-to-br ${AVATAR_COLORS[index % AVATAR_COLORS.length]} text-slate-900 font-black text-xl flex items-center justify-center shrink-0`}
+                    >
+                      {getInitials(cert.title || cert.issuer)}
                     </div>
-                  ) : (
-                    <img
-                      src={cert.image && (cert.image.startsWith('http') ? cert.image : `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000'}${cert.image}`)}
-                      alt={cert.issuer}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform"
-                    />
-                  ))}
-                  <div className="p-4 flex justify-between items-start">
-                    <div>
-                      <h3 className="text-white font-bold tracking-wider">{cert.issuer}</h3>
-                      <p className="text-gray-400 text-sm">{cert.date}</p>
+
+                    <div className="flex-1 min-w-0">
+                      <h3 className="text-white font-bold text-xl leading-tight truncate">{cert.title}</h3>
+                      <p className="text-slate-300 text-lg truncate mt-1">{cert.issuer}</p>
+                      <p className="text-slate-500 text-sm tracking-[0.18em] uppercase mt-2">{cert.date}</p>
                     </div>
-                    <div className="flex gap-2">
+
+                    <div className="flex items-center gap-2 shrink-0">
                       <motion.button
                         whileHover={{ scale: 1.1 }}
                         onClick={() => handleEdit(cert)}
-                        className="p-1.5 bg-electric-blue/20 text-electric-blue rounded hover:bg-electric-blue/30"
+                        className="h-10 w-10 rounded-xl bg-electric-blue/15 text-electric-blue grid place-items-center hover:bg-electric-blue/25 transition-colors"
+                        title="Edit certificate"
                       >
-                        <Edit2 size={16} />
+                        <Edit2 size={17} />
                       </motion.button>
                       <motion.button
                         whileHover={{ scale: 1.1 }}
                         onClick={() => handleDelete(cert._id)}
-                        className="p-1.5 bg-red-500/20 text-red-400 rounded hover:bg-red-500/30"
+                        className="h-10 w-10 rounded-xl bg-red-500/15 text-red-400 grid place-items-center hover:bg-red-500/25 transition-colors"
+                        title="Delete certificate"
                       >
-                        <Trash2 size={16} />
+                        <Trash2 size={17} />
                       </motion.button>
                     </div>
                   </div>

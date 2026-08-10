@@ -1,151 +1,143 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { GraduationCap, BookOpen, Award } from 'lucide-react';
+import React, { useEffect, useRef } from 'react';
 
 const Education = () => {
-  const semesters = [
-    { title: 'Semester 1', sgpa: '7.42', icon: <BookOpen size={24} />, color: 'blue' },
-    { title: 'Semester 2', sgpa: '6.83', icon: <Award size={24} />, color: 'purple' },
-    { title: 'Semester 3', sgpa: '7.52', icon: <GraduationCap size={24} />, color: 'cyan' },
-    { title: 'Semester 4', sgpa: '7.64', icon: <BookOpen size={24} />, color: 'emerald' },
-    { title: 'Semester 5', sgpa: 'Current', icon: <Award size={24} />, color: 'pink', isCurrent: true }
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          el.querySelectorAll('.reveal').forEach(r => r.classList.add('in'));
+        }
+      }),
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  const timeline = [
+    {
+      when: '2022 — Present',
+      title: 'Bachelor of Computer Applications (BCA)',
+      org: 'Noble University, Junagadh',
+    },
+    {
+      when: 'Sem 1 — 7.42 SGPA',
+      title: 'Core Programming & Web Fundamentals',
+      org: 'C, C++, HTML, CSS, Database Basics',
+    },
+    {
+      when: 'Sem 2 — 6.83 SGPA',
+      title: 'Data Structures & Web Design',
+      org: 'JavaScript, Data Structures',
+    },
+    {
+      when: 'Sem 3 — 7.52 SGPA',
+      title: 'Advanced Programming',
+      org: 'Java, Operating Systems',
+    },
+    {
+      when: 'Sem 4 — 7.64 SGPA',
+      title: 'Full Stack & Software Engineering',
+      org: 'MERN Stack, Software Engineering',
+    },
+    {
+      when: 'Sem 5 — Current',
+      title: 'Advanced Web',
+      org: 'React and Advanced Javascript',
+    },
   ];
 
-  const getColorClasses = (color) => {
-    const colors = {
-      blue: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-      purple: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-      cyan: 'bg-cyan-500/10 text-cyan-400 border-cyan-500/20',
-      emerald: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
-      pink: 'bg-pink-500/10 text-pink-400 border-pink-500/20',
-    };
-    return colors[color] || colors.blue;
-  };
-
-  const getSgpaColor = (color) => {
-    const colors = {
-      blue: 'text-blue-400',
-      purple: 'text-purple-400',
-      cyan: 'text-cyan-400',
-      emerald: 'text-emerald-400',
-      pink: 'text-pink-400',
-    };
-    return colors[color] || colors.blue;
-  };
+  const badges = [
+    'BCA Graduate (In Progress)',
+    'MERN Stack Specialist',
+    'Full Stack Architect',
+    
+  ];
 
   return (
-    <section id="education" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(6,182,212,0.1)_0%,transparent_50%)] pointer-events-none" />
-      
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-24 relative">
-          {/* Background Glow */}
-          <div className="absolute inset-0 top-1/2 -translate-y-1/2 h-40 bg-gradient-to-r from-purple-500/20 to-pink-500/20 blur-3xl pointer-events-none" />
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="relative w-full"
-          >
-            <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight whitespace-normal">
-              Academic <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 bg-clip-text text-transparent drop-shadow-lg">Performance</span>
-            </h2>
-          </motion.div>
-          
-          {/* Animated Line */}
-          <motion.div 
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ delay: 0.3, duration: 1, ease: "easeInOut" }}
-            className="h-1.5 w-48 bg-gradient-to-r from-purple-400 to-pink-500 mx-auto rounded-full shadow-[0_0_20px_rgba(168,85,247,0.8)]"
-          />
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="mt-6 text-lg text-gray-300 font-semibold tracking-wide"
-          >
-            Pursuing BCA @ Noble University, Junagadh
-          </motion.p>
+    <section id="education" ref={sectionRef}>
+      <div className="wrap">
+        <div className="sec-head reveal">
+          <p className="kicker">Background</p>
+          <h2>Education &amp; academic track record.</h2>
+          <p>
+            Pursuing a Bachelor of Computer Applications at Noble University, Junagadh — with consistent
+            academic growth and a deep focus on full-stack web development.
+          </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {semesters.map((sem, index) => (
-            <motion.div
-              key={sem.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08 }}
-              whileHover={{ rotateY: 5, rotateX: -5, z: 100 }}
-              className="group relative"
-            >
-              {/* Card Glow Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-pink-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200 blur-lg" />
-              
-              {/* Card */}
-              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-5 flex flex-col items-center justify-center text-center min-h-[160px] hover:border-purple-400/50 transition-[border-color,background,box-shadow] duration-200 group-hover:from-white/15 group-hover:to-white/8 group-hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]">
-                
-                {/* Gradient Line Top */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 rounded-t-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
-                
-                {/* Icon */}
-                <div className={`mb-3 p-3 rounded-xl transition-[background-color,transform] duration-200 group-hover:scale-120 group-hover:rotate-12 border ${getColorClasses(sem.color)}`}>
-                  {sem.icon}
-                </div>
-                
-                {/* Semester Title */}
-                <h3 className="text-lg font-black text-white mb-2 leading-tight group-hover:text-purple-300 transition-colors duration-200">
-                  {sem.title}
-                </h3>
-                
-                {/* SGPA */}
-                <div className={`text-2xl font-black leading-none ${getSgpaColor(sem.color)}`}>
-                  {sem.sgpa}
-                </div>
-                {!sem.isCurrent && <span className="text-xs uppercase tracking-widest text-gray-400 mt-1">SGPA</span>}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 56, alignItems: 'start' }}>
+          {/* Timeline */}
+          <div className="timeline reveal">
+            {timeline.map((item, i) => (
+              <div key={i} className="tl-item">
+                <div className="tl-when">{item.when}</div>
+                <h3>{item.title}</h3>
+                <div className="tl-org">{item.org}</div>
               </div>
-            </motion.div>
-          ))}
-        </div>
-
-        <div className="mt-20 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="mb-12"
-          >
-            <h3 className="text-3xl md:text-4xl font-black mb-4 tracking-tighter">
-              MERN Stack <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Specialization</span>
-            </h3>
-          </motion.div>
-          
-          <div className="flex flex-wrap justify-center gap-4">
-            {[
-              'MongoDB', 'Express.js', 'React.js', 'Node.js', 
-              'Tailwind CSS', 'Full-Stack Architecture'
-            ].map((course, idx) => (
-              <motion.div
-                key={course}
-                initial={{ opacity: 0, scale: 0.9 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                whileHover={{ scale: 1.1, y: -5 }}
-                className="px-4 py-2.5 md:px-6 md:py-3 text-sm md:text-base bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl text-white font-semibold hover:border-purple-400/50 transition-all duration-200 hover:shadow-[0_0_20px_rgba(168,85,247,0.3)]"
-              >
-                {course}
-              </motion.div>
             ))}
+          </div>
+
+          {/* Right side: highlights */}
+          <div className="reveal">
+            <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '1.3rem', marginBottom: 14 }}>
+              Key skills developed
+            </h3>
+            <p style={{ color: 'var(--muted)', marginBottom: 24, fontSize: '.97rem' }}>
+              My BCA coursework combined with self-driven projects has built a strong foundation
+              across the full web development spectrum — from algorithms to production deployments.
+            </p>
+
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, marginBottom: 36 }}>
+              {badges.map(b => (
+                <span key={b} className="badge">
+                  <span className="star">★</span> {b}
+                </span>
+              ))}
+            </div>
+
+            {/* MERN focus box */}
+            <div style={{
+              border: '1px solid var(--line)',
+              borderRadius: 14,
+              padding: '24px 26px',
+              background: 'var(--bg-soft)',
+            }}>
+              <div className="kicker" style={{ marginBottom: 12 }}>MERN Specialization</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10 }}>
+                {['MongoDB', 'Express.js', 'React.js', 'Node.js', 'Tailwind CSS', 'REST APIs', 'JWT', 'Git'].map(t => (
+                  <span
+                    key={t}
+                    style={{
+                      padding: '7px 14px',
+                      border: '1px solid var(--line)',
+                      borderRadius: 999,
+                      fontSize: '.82rem',
+                      color: 'var(--muted)',
+                      background: 'var(--panel)',
+                    }}
+                  >
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          #education .wrap > div[style*="grid"] {
+            grid-template-columns: 1fr !important;
+            gap: 40px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

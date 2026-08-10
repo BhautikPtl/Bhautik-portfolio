@@ -47,7 +47,29 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+const PORT = parseInt(process.env.PORT, 10) || 5000;
+
+function startServer(port, attempt = 0) {
+  const server = app.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+  });
+
+  server.on('error', (err) => {
+    if (err && err.code === 'EADDRINUSE') {
+      if (attempt < 5) {
+        const nextPort = port + 1;
+        console.warn(`Port ${port} in use, trying ${nextPort} (attempt ${attempt + 1})`);
+        // give a small delay before retrying to avoid tight loop
+        setTimeout(() => startServer(nextPort, attempt + 1), 200);
+      } else {
+        console.error(`Port ${port} in use and max retries reached. Exiting.`);
+        process.exit(1);
+      }
+    } else {
+      console.error('Server error:', err);
+      process.exit(1);
+    }
+  });
+}
+
+startServer(PORT);

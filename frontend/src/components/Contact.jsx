@@ -1,11 +1,26 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Send, Mail, User, MessageSquare, CheckCircle, Github, Linkedin } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { Send, Mail, MapPin, Github, Linkedin, CheckCircle, AlertCircle } from 'lucide-react';
 import { messagesAPI } from '../utils/api';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState('idle'); // idle, loading, success, error
+  const [status, setStatus] = useState('idle');
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => {
+        if (e.isIntersecting) {
+          el.querySelectorAll('.reveal').forEach(r => r.classList.add('in'));
+        }
+      }),
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,215 +36,249 @@ const Contact = () => {
     }
   };
 
+  const inputStyle = {
+    width: '100%',
+    background: 'var(--bg)',
+    border: '1px solid var(--line-strong)',
+    borderRadius: 10,
+    padding: '12px 16px',
+    color: 'var(--txt)',
+    fontSize: '.95rem',
+    fontFamily: 'inherit',
+    outline: 'none',
+    transition: '.2s',
+  };
+
+  const labelStyle = {
+    display: 'block',
+    fontSize: '.78rem',
+    color: 'var(--muted)',
+    fontFamily: "'JetBrains Mono', monospace",
+    textTransform: 'uppercase',
+    letterSpacing: '.1em',
+    marginBottom: 8,
+  };
+
   return (
-    <section id="contact" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(239,68,68,0.1)_0%,transparent_50%)] pointer-events-none" />
-      
-      <div className="container mx-auto px-6 relative z-10">
-        {/* Header */}
-        <div className="text-center mb-24 relative">
-          {/* Background Glow */}
-          <div className="absolute inset-0 top-1/2 -translate-y-1/2 h-40 bg-gradient-to-r from-red-500/20 to-pink-500/20 blur-3xl pointer-events-none" />
-          
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="relative w-full"
-          >
-            <h2 className="text-5xl md:text-6xl font-black mb-6 tracking-tight whitespace-normal">
-              Let's <span className="bg-gradient-to-r from-red-400 via-pink-400 to-orange-400 bg-clip-text text-transparent drop-shadow-lg">Connect</span>
-            </h2>
-          </motion.div>
-          
-          {/* Animated Line */}
-          <motion.div 
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            transition={{ delay: 0.3, duration: 1, ease: "easeInOut" }}
-            className="h-1.5 w-48 bg-gradient-to-r from-red-400 to-pink-500 mx-auto rounded-full shadow-[0_0_20px_rgba(239,68,68,0.8)]"
-          />
-          
-          <motion.p 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="mt-6 text-lg text-gray-300 font-semibold tracking-wide max-w-2xl mx-auto"
-          >
-            Have a project in mind? Let's discuss new projects, creative ideas, or opportunities to bring your visions to life.
-          </motion.p>
+    <section id="contact" ref={sectionRef}>
+      <div className="wrap">
+        {/* CTA Box */}
+        <div
+          className="cta-box reveal"
+          style={{
+            marginBottom: 64,
+            background: 'var(--panel)',
+            border: '1px solid var(--line)',
+            borderRadius: 'var(--radius)',
+            padding: 32,
+          }}
+        >
+          <h2>
+            Ready to build something{' '}
+            <span style={{
+              background: 'linear-gradient(120deg, var(--accent), var(--accent-2))',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}>
+              great?
+            </span>
+          </h2>
+          <p>
+            Whether it's a new project, a quick question, or a collaboration opportunity — I'm available
+            and ready to build. Let's talk.
+          </p>
+          <div className="cta-buttons" style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap', background: 'transparent' }}>
+            <a href="mailto:vachhanib485@gmail.com" className="btn btn-primary">
+              Send an Email →
+            </a>
+            <a href="https://www.linkedin.com/in/bhautik-vachhani-427540304" target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+              Connect on LinkedIn
+            </a>
+          </div>
         </div>
 
-        {/* Contact Container */}
-        <div className="max-w-4xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-6 relative">
-            {/* Left Side - Info */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="group relative"
-              whileHover={{ y: -5 }}
-            >
-              {/* Card Glow Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500/30 to-pink-500/20 rounded-2xl opacity-0 transition-opacity duration-200 blur-lg" />
-              
-              {/* Card */}
-              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-8 flex flex-col justify-between transition-[border-color,background,box-shadow] duration-200 hover:border-red-400/60 hover:shadow-[0_12px_48px_rgba(239,68,68,0.4)]" >
-                
-                {/* Gradient Line Top */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-400 via-pink-400 to-orange-400 rounded-t-2xl opacity-0 transition-opacity duration-200" />
-                
+        {/* Contact Grid */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.4fr', gap: 32 }}>
+          {/* Left: contact info */}
+          <div className="reveal" style={{
+            background: 'var(--panel)',
+            border: '1px solid var(--line)',
+            borderRadius: 'var(--radius)',
+            padding: 32,
+            display: 'flex',
+            flexDirection: 'column',
+            gap: 0,
+          }}>
+            <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '1.2rem', marginBottom: 24 }}>
+              Get in Touch
+            </h3>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 20, flex: 1 }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+                <div style={{
+                  width: 44, height: 44,
+                  background: 'linear-gradient(135deg, rgba(94,234,212,.16), rgba(124,131,255,.16))',
+                  border: '1px solid var(--line-strong)',
+                  borderRadius: 12,
+                  display: 'grid', placeItems: 'center',
+                  color: 'var(--accent)',
+                  flexShrink: 0,
+                }}>
+                  <Mail size={18} />
+                </div>
                 <div>
-                  <h3 className="text-2xl font-black mb-8 transition-colors">Get in Touch</h3>
-                  
-                  <div className="space-y-6">
-                    <motion.div 
-                      whileHover={{ x: 5 }}
-                      className="flex items-start gap-4 cursor-default"
-                    >
-                      <div className="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center text-red-400 border border-red-500/30 flex-shrink-0 transition-transform duration-200">
-                        <Mail size={20} />
-                      </div>
-                      <div>
-                        <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold">Email</div>
-                        <div className="font-semibold text-white">vachhanib485@gmail.com</div>
-                      </div>
-                    </motion.div>
-                    
-                    <motion.div 
-                      whileHover={{ x: 5 }}
-                      className="flex items-start gap-4 cursor-default"
-                    >
-                      <div className="w-12 h-12 bg-pink-500/20 rounded-xl flex items-center justify-center text-pink-400 border border-pink-500/30 flex-shrink-0 transition-transform duration-200">
-                        <User size={20} />
-                      </div>
-                      <div>
-                        <div className="text-xs uppercase tracking-wider text-gray-400 font-semibold">Location</div>
-                        <div className="font-semibold text-white">Junagadh, Gujarat, India</div>
-                      </div>
-                    </motion.div>
+                  <div style={{ fontSize: '.78rem', color: 'var(--dim)', textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: 4 }}>Email</div>
+                  <div style={{ color: 'var(--txt)', fontSize: '.95rem' }}>vachhanib485@gmail.com</div>
+                </div>
+              </div>
+
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: 16 }}>
+                <div style={{
+                  width: 44, height: 44,
+                  background: 'linear-gradient(135deg, rgba(94,234,212,.16), rgba(124,131,255,.16))',
+                  border: '1px solid var(--line-strong)',
+                  borderRadius: 12,
+                  display: 'grid', placeItems: 'center',
+                  color: 'var(--accent)',
+                  flexShrink: 0,
+                }}>
+                  <MapPin size={18} />
+                </div>
+                <div>
+                  <div style={{ fontSize: '.78rem', color: 'var(--dim)', textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: 4 }}>Location</div>
+                  <div style={{ color: 'var(--txt)', fontSize: '.95rem' }}>Junagadh, Gujarat, India</div>
+                </div>
+              </div>
+            </div>
+
+            <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid var(--line)', display: 'flex', gap: 12 }}>
+              <a
+                href="https://github.com/BhautikPtl"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost"
+                style={{ flex: 1, justifyContent: 'center' }}
+              >
+                <Github size={16} /> GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/bhautik-vachhani-427540304"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-ghost"
+                style={{ flex: 1, justifyContent: 'center' }}
+              >
+                <Linkedin size={16} /> LinkedIn
+              </a>
+            </div>
+          </div>
+
+          {/* Right: Form */}
+          <div className="reveal" style={{
+            background: 'var(--panel)',
+            border: '1px solid var(--line)',
+            borderRadius: 'var(--radius)',
+            padding: 32,
+          }}>
+            {status === 'success' ? (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', height: '100%', textAlign: 'center', padding: '40px 0', gap: 16 }}>
+                <div style={{
+                  width: 72, height: 72,
+                  background: 'rgba(94,234,212,.15)',
+                  borderRadius: '50%',
+                  display: 'grid', placeItems: 'center',
+                  color: 'var(--accent)',
+                  border: '1px solid rgba(94,234,212,.3)',
+                }}>
+                  <CheckCircle size={34} />
+                </div>
+                <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '1.3rem' }}>Message Sent!</h3>
+                <p style={{ color: 'var(--muted)', maxWidth: 320, fontSize: '.95rem' }}>
+                  Thank you for reaching out. I'll get back to you shortly.
+                </p>
+                <button
+                  onClick={() => setStatus('idle')}
+                  className="btn btn-ghost"
+                >
+                  Send Another
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+                <h3 style={{ fontFamily: "'Space Grotesk', sans-serif", fontSize: '1.2rem', marginBottom: 4 }}>
+                  Send a Message
+                </h3>
+
+                <div>
+                  <label style={labelStyle}>Name</label>
+                  <input
+                    required
+                    type="text"
+                    placeholder="Your name"
+                    value={formData.name}
+                    onChange={e => setFormData({ ...formData, name: e.target.value })}
+                    style={inputStyle}
+                    onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+                    onBlur={e => e.target.style.borderColor = 'var(--line-strong)'}
+                  />
+                </div>
+
+                <div>
+                  <label style={labelStyle}>Email</label>
+                  <input
+                    required
+                    type="email"
+                    placeholder="your@email.com"
+                    value={formData.email}
+                    onChange={e => setFormData({ ...formData, email: e.target.value })}
+                    style={inputStyle}
+                    onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+                    onBlur={e => e.target.style.borderColor = 'var(--line-strong)'}
+                  />
+                </div>
+
+                <div>
+                  <label style={labelStyle}>Message</label>
+                  <textarea
+                    required
+                    rows={5}
+                    placeholder="Your message..."
+                    value={formData.message}
+                    onChange={e => setFormData({ ...formData, message: e.target.value })}
+                    style={{ ...inputStyle, resize: 'none' }}
+                    onFocus={e => e.target.style.borderColor = 'var(--accent)'}
+                    onBlur={e => e.target.style.borderColor = 'var(--line-strong)'}
+                  />
+                </div>
+
+                {status === 'error' && (
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: '#f87171', fontSize: '.9rem' }}>
+                    <AlertCircle size={16} /> Failed to send. Please try again.
                   </div>
-                </div>
-
-                <div className="mt-12 pt-8 border-t border-white/10 flex gap-4">
-                  <motion.a 
-                    whileHover={{ scale: 1.1, y: -3 }}
-                    href="https://github.com/BhautikPtl" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-sm font-bold text-white hover:border-red-400/50 hover:bg-red-500/10 transition-all duration-200"
-                  >
-                    <Github size={18} /> GitHub
-                  </motion.a>
-                  <motion.a 
-                    whileHover={{ scale: 1.1, y: -3 }}
-                    href="https://www.linkedin.com/in/bhautik-vachhani-427540304" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-sm font-bold text-white hover:border-red-400/50 hover:bg-red-500/10 transition-all duration-200"
-                  >
-                    <Linkedin size={18} /> LinkedIn
-                  </motion.a>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Right Side - Form */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="group relative"
-              whileHover={{ y: -5 }}
-            >
-              {/* Card Glow Background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-red-500/30 to-pink-500/20 rounded-2xl opacity-0 transition-opacity duration-200 blur-lg" />
-              
-              {/* Card */}
-              <div className="relative bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 rounded-2xl p-8 transition-[border-color,background,box-shadow] duration-200 hover:border-red-400/60 hover:shadow-[0_12px_48px_rgba(239,68,68,0.4)]" >
-                
-                {/* Gradient Line Top */}
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-400 via-pink-400 to-orange-400 rounded-t-2xl opacity-0 transition-opacity duration-200" />
-                
-                {status === 'success' ? (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="h-full flex flex-col items-center justify-center text-center py-12"
-                  >
-                    <div className="w-20 h-20 bg-emerald-500/20 text-emerald-400 rounded-full flex items-center justify-center mb-6 border border-emerald-500/30">
-                      <CheckCircle size={40} />
-                    </div>
-                    <h3 className="text-2xl font-black mb-2">Message Sent!</h3>
-                    <p className="text-gray-400 mb-8">Thank you for reaching out. I'll get back to you shortly.</p>
-                    <motion.button 
-                      whileHover={{ scale: 1.05 }}
-                      onClick={() => setStatus('idle')}
-                      className="px-6 py-2 bg-red-500/20 border border-red-400/50 rounded-lg text-red-400 font-bold uppercase tracking-widest text-sm hover:bg-red-500/30 transition-all"
-                    >
-                      Send Another
-                    </motion.button>
-                  </motion.div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-5">
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">Name</label>
-                      <input 
-                        required
-                        type="text" 
-                        placeholder="Your name"
-                        value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
-                        className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:border-red-400/50 focus:bg-white/10 outline-none transition-all duration-200"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">Email</label>
-                      <input 
-                        required
-                        type="email" 
-                        placeholder="your@email.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData({...formData, email: e.target.value})}
-                        className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:border-red-400/50 focus:bg-white/10 outline-none transition-all duration-200"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <label className="text-xs font-bold text-gray-400 uppercase tracking-wider ml-1">Message</label>
-                      <textarea 
-                        required
-                        rows={4}
-                        placeholder="Your message..."
-                        value={formData.message}
-                        onChange={(e) => setFormData({...formData, message: e.target.value})}
-                        className="w-full bg-white/5 border border-white/10 rounded-lg py-3 px-4 text-white placeholder-gray-500 focus:border-red-400/50 focus:bg-white/10 outline-none transition-all resize-none duration-200"
-                      />
-                    </div>
-
-                    <motion.button
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      disabled={status === 'loading'}
-                      type="submit"
-                      className="w-full py-3 bg-gradient-to-r from-red-500/30 to-pink-500/20 border border-red-400/50 text-white rounded-lg font-bold flex items-center justify-center gap-2 hover:border-red-300 hover:shadow-[0_0_20px_rgba(239,68,68,0.3)] transition-all duration-200 disabled:opacity-50"
-                    >
-                      {status === 'loading' ? 'Sending...' : (
-                        <>Send Message <Send size={18} /></>
-                      )}
-                    </motion.button>
-                  </form>
                 )}
-              </div>
-            </motion.div>
+
+                <button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="btn btn-primary"
+                  style={{ justifyContent: 'center', opacity: status === 'loading' ? 0.7 : 1 }}
+                >
+                  {status === 'loading' ? 'Sending...' : <><Send size={16} /> Send Message</>}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          #contact .wrap > div[style*="grid"] {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

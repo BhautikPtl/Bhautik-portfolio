@@ -7,7 +7,7 @@ export default defineConfig({
     drop: ['console', 'debugger'],
   },
   server: {
-    port: 5173,
+    port: 5155,
     proxy: {
       '/api': {
         target: 'http://localhost:5000',

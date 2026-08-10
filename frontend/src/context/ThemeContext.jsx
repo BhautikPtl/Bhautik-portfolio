@@ -2,35 +2,41 @@ import { createContext, useState, useEffect } from 'react';
 
 export const ThemeContext = createContext();
 
-export const ThemeProvider = ({ children }) => {
-  const [isDark, setIsDark] = useState(true);
+const getInitialTheme = () => {
+  if (typeof window === 'undefined') {
+    return true;
+  }
 
-  // Load theme preference from localStorage
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('portfolio-theme');
-    if (savedTheme) {
-      setIsDark(savedTheme === 'dark');
-    } else {
-      // Default to dark mode
-      setIsDark(true);
-    }
-  }, []);
+  try {
+    const savedTheme = localStorage.getItem('portfolio-theme') || localStorage.getItem('theme');
+    if (savedTheme === 'light') return false;
+    if (savedTheme === 'dark') return true;
+  } catch (error) {
+    console.warn('Theme preference could not be read:', error);
+  }
+
+  return window.matchMedia?.('(prefers-color-scheme: dark)').matches ?? true;
+};
+
+export const ThemeProvider = ({ children }) => {
+  const [isDark, setIsDark] = useState(getInitialTheme);
 
   // Update localStorage and DOM when theme changes
   useEffect(() => {
     const htmlElement = document.documentElement;
-    
-    if (isDark) {
-      htmlElement.classList.add('dark');
-      localStorage.setItem('portfolio-theme', 'dark');
-    } else {
-      htmlElement.classList.remove('dark');
-      localStorage.setItem('portfolio-theme', 'light');
+    const themeValue = isDark ? 'dark' : 'light';
+    htmlElement.setAttribute('data-theme', themeValue);
+    // Persist to both keys (legacy + new) so older code paths keep working
+    try {
+      localStorage.setItem('portfolio-theme', themeValue);
+      localStorage.setItem('theme', themeValue);
+    } catch (e) {
+      // ignore storage errors
     }
   }, [isDark]);
 
   const toggleTheme = () => {
-    setIsDark(!isDark);
+    setIsDark((prev) => !prev);
   };
 
   return (

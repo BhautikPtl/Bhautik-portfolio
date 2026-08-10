@@ -4,6 +4,7 @@ import imagekit from '../config/imagekit.js';
 export const getCertificates = async (req, res) => {
   try {
     const certificates = await Certificate.find().sort({ date: -1 });
+    console.log('Fetched Certificates:', certificates); // Debugging log
     res.json(certificates);
   } catch (err) {
     res.status(500).json({ message: err.message });
@@ -13,7 +14,7 @@ export const getCertificates = async (req, res) => {
 export const createCertificate = async (req, res) => {
   try {
     const certificateData = { ...req.body };
-    
+
     if (req.file) {
       try {
         const uploadResponse = await imagekit.upload({

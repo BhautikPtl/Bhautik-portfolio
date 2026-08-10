@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, Award, MessageSquare, TrendingUp } from 'lucide-react';
+import { Briefcase, Award, MessageSquare } from 'lucide-react';
 import { projectsAPI, certificatesAPI, messagesAPI } from '../../utils/api';
 
 const Analytics = () => {
@@ -50,32 +50,6 @@ const Analytics = () => {
             <div className="text-slate-400 font-medium">{card.label}</div>
           </motion.div>
         ))}
-      </div>
-
-      <div className="glass p-6 lg:p-8 rounded-2xl lg:rounded-[2.5rem] italic overflow-hidden">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-xl font-bold font-bold">Activity Chart</h2>
-          <div className="flex items-center gap-2 text-green-500 text-sm font-bold">
-            <TrendingUp size={16} /> +12% this week
-          </div>
-        </div>
-        
-        <div className="h-48 flex items-end gap-2 italic">
-          {[40, 70, 45, 90, 65, 80, 55, 75, 50, 85].map((h, i) => (
-            <motion.div
-              key={i}
-              initial={{ height: 0 }}
-              animate={{ height: `${h}%` }}
-              className="flex-1 bg-gradient-to-t from-blue-600 to-purple-600 opacity-20 hover:opacity-100 transition-opacity rounded-t-lg"
-            />
-          ))}
-        </div>
-        <div className="flex justify-between mt-4 text-xs text-slate-500 font-medium italic">
-          <span>MON</span>
-          <span>WED</span>
-          <span>FRI</span>
-          <span>SUN</span>
-        </div>
       </div>
     </div>
   );

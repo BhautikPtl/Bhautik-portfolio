@@ -1,12 +1,8 @@
 import React, { useEffect, useState, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { motion, useScroll, useSpring } from 'framer-motion';
 import LoadingScreen from './components/LoadingScreen';
 import useStore from './utils/store';
-import Chatbot from './components/Chatbot';
-import Particles from './components/Particles';
 import AssetPreloader from './components/AssetPreloader';
-import CustomCursor from './components/CustomCursor';
 
 // Lazy loading components for instant initial page load
 const Home = lazy(() => import('./pages/Home'));
@@ -19,46 +15,41 @@ const ProtectedRoute = ({ children }) => {
   return isLoggedIn ? children : <Navigate to="/admin/login" />;
 };
 
-const ScrollProgress = () => {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
-
-  return <motion.div className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-accent origin-left z-[10000]" style={{ scaleX, willChange: "transform" }} />;
-};
-
 const App = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // Theme is managed by ThemeProvider; no-op here to avoid conflicting defaults
+  }, []);
+
+  useEffect(() => {
     if (loading) return;
 
+    // Reveal-on-scroll using IntersectionObserver
     const revealElements = document.querySelectorAll('.reveal');
-    
-    const checkReveal = () => {
-      revealElements.forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight * 0.9) {
-          el.classList.add('active');
-        }
-      });
-    };
 
-    const observerOptions = { threshold: 0.1 };
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('active');
-        }
-      });
-    }, observerOptions);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in');
+          }
+        });
+      },
+      { threshold: 0.08 }
+    );
 
     revealElements.forEach(el => observer.observe(el));
-    
-    const timer = setTimeout(checkReveal, 500);
+
+    // Trigger any already-visible elements
+    const timer = setTimeout(() => {
+      revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.92) {
+          el.classList.add('in');
+        }
+      });
+    }, 300);
 
     return () => {
       observer.disconnect();
@@ -71,15 +62,22 @@ const App = () => {
       {loading ? (
         <LoadingScreen onFinish={() => setLoading(false)} />
       ) : (
-        <div className="relative font-outfit selection:bg-primary/30 mesh-gradient min-h-screen">
-          <CustomCursor />
+        <div style={{ position: 'relative', minHeight: '100vh' }}>
+          {/* Fixed grid background */}
+          <div className="grid-bg" aria-hidden="true" />
+
           <AssetPreloader />
-          <Particles />
-          <div className="bg-noise" />
-          <ScrollProgress />
+
           <Suspense fallback={
-            <div className="min-h-screen flex items-center justify-center bg-[#0a0a0a]">
-              <div className="w-10 h-10 border-4 border-[#5b78ff] border-t-transparent rounded-full animate-spin"></div>
+            <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg)' }}>
+              <div style={{
+                width: 40, height: 40,
+                border: '3px solid var(--line-strong)',
+                borderTopColor: 'var(--accent)',
+                borderRadius: '50%',
+                animation: 'spin .8s linear infinite',
+              }} />
+              <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
             </div>
           }>
             <Routes>
@@ -96,7 +94,6 @@ const App = () => {
               />
             </Routes>
           </Suspense>
-          <Chatbot />
         </div>
       )}
     </Router>
