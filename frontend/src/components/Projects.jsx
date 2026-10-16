@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { BACKEND_URL, projectsAPI } from '../utils/api';
-import { ArrowUpRight, Github, ExternalLink } from 'lucide-react';
+import { Github, ExternalLink } from 'lucide-react';
 
 const getImageUrl = (image) => {
   if (!image) return '';
@@ -110,6 +110,7 @@ const ProjectRow = ({ project, index }) => {
       )}
       <div className="project-card-content">
         <div className="work-name">{project.title}</div>
+        <p className="project-card-description">{project.description}</p>
         <span className="work-url">
           {techStack.slice(0, 3).join(' · ')}
         </span>
@@ -153,7 +154,6 @@ const ProjectRow = ({ project, index }) => {
             <ExternalLink size={16} />
           </a>
         )}
-        <span className="work-arrow"><ArrowUpRight size={18} /></span>
       </div>
     </div>
   );
