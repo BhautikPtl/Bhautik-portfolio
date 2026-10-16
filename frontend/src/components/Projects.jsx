@@ -1,6 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { projectsAPI } from '../utils/api';
+import { BACKEND_URL, projectsAPI } from '../utils/api';
 import { ArrowUpRight, Github, ExternalLink } from 'lucide-react';
+
+const getImageUrl = (image) => {
+  if (!image) return '';
+  return image.startsWith('http') ? image : `${BACKEND_URL}${image}`;
+};
 
 const Projects = () => {
   const [projects, setProjects] = useState([]);
@@ -54,20 +59,20 @@ const Projects = () => {
         >
           {projects.length > 0
             ? projects.map((project, index) => (
-                <ProjectRow key={project._id} project={project} index={index} />
-              ))
+              <ProjectRow key={project._id} project={project} index={index} />
+            ))
             : [1, 2, 3, 4, 5, 6].map(i => (
-                <div
-                  key={i}
-                  style={{
-                    height: 80,
-                    background: 'var(--panel)',
-                    borderRadius: 14,
-                    border: '1px solid var(--line)',
-                    opacity: 0.5,
-                  }}
-                />
-              ))}
+              <div
+                key={i}
+                style={{
+                  height: 80,
+                  background: 'var(--panel)',
+                  borderRadius: 14,
+                  border: '1px solid var(--line)',
+                  opacity: 0.5,
+                }}
+              />
+            ))}
         </div>
       </div>
 
@@ -95,6 +100,14 @@ const ProjectRow = ({ project, index }) => {
       className="work-row reveal"
       style={{ transitionDelay: `${index * 0.06}s` }}
     >
+      {project.image && (
+        <img
+          src={getImageUrl(project.image)}
+          alt={project.title}
+          loading="lazy"
+          style={{ width: '100%', height: 150, objectFit: 'cover', borderRadius: 12, marginBottom: 12 }}
+        />
+      )}
       <div style={{ flex: 1, minWidth: 0 }}>
         <div className="work-name">{project.title}</div>
         <span className="work-url">
