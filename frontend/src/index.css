@@ -486,8 +486,7 @@ section {
 }
 
 .project-card:hover {
-  background: var(--panel-2);
-  border-color: var(--line-strong);
+  border-color: var(--accent);
   transform: translateY(-3px);
 }
 
