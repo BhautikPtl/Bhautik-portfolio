@@ -486,7 +486,14 @@ section {
 }
 
 .project-card:hover {
-  border-color: var(--accent);
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, .2);
+  transform: translateY(-3px);
+}
+
+.admin-project-card:hover {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, .2);
   transform: translateY(-3px);
 }
 

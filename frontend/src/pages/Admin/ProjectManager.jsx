@@ -90,7 +90,7 @@ const ProjectManager = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map(p => (
-          <div key={p._id} className="glass-card p-6 rounded-[2rem] group flex flex-col border border-white/5 hover:border-cyan-500/30 transition-all">
+          <div key={p._id} className="admin-project-card glass-card p-6 rounded-[2rem] group flex flex-col border border-white/5 transition-all">
             {p.image ? (
               <img src={getImageUrl(p.image)} alt={p.title} className="w-full h-40 object-cover rounded-2xl mb-5" />
             ) : (
