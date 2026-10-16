@@ -94,6 +94,7 @@ const Projects = () => {
 
 const ProjectRow = ({ project, index }) => {
   const techStack = Array.isArray(project.techStack) ? project.techStack : [];
+  const description = project.description || project.desc || 'No description added.';
 
   return (
     <div
@@ -110,7 +111,7 @@ const ProjectRow = ({ project, index }) => {
       )}
       <div className="project-card-content">
         <div className="work-name">{project.title}</div>
-        <p className="project-card-description">{project.description}</p>
+        <p className="project-card-description">{description}</p>
         <span className="work-url">
           {techStack.slice(0, 3).join(' · ')}
         </span>
