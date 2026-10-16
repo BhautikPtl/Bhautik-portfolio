@@ -469,7 +469,84 @@ section {
 }
 
 /* ============================================================
-   Work Rows (Projects)
+   Project Cards
+   ============================================================ */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 230px;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--bg-soft);
+  transition: .3s;
+  text-decoration: none;
+  color: var(--txt);
+}
+
+.project-card:hover {
+  background: var(--panel-2);
+  border-color: var(--line-strong);
+  transform: translateY(-3px);
+}
+
+.project-card-image {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-bottom: 14px;
+  background: var(--panel);
+}
+
+.project-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.project-card .work-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'Space Grotesk';
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+.project-card .work-url {
+  display: block;
+  min-height: 1.15em;
+  margin-top: 4px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-family: 'JetBrains Mono';
+  font-size: .76rem;
+  color: var(--dim);
+}
+
+.project-card-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  min-height: 28px;
+  margin-top: 14px;
+}
+
+.project-card .work-arrow {
+  color: var(--accent);
+  transition: .25s;
+  flex-shrink: 0;
+}
+
+.project-card:hover .work-arrow {
+  transform: translate(3px, -3px);
+}
+
+/* ============================================================
+   Work Rows (legacy)
    ============================================================ */
 .work-row {
   display: flex;
@@ -709,7 +786,6 @@ section {
 @media (max-width: 900px) {
   .wrap { padding: 0 20px; }
   section { padding: 80px 0; }
-  .work-row,
   .plugin-card { padding: 18px 18px; }
 }
 
@@ -722,11 +798,6 @@ section {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
-  }
-  .work-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
   }
   .stat-num { font-size: 1.8rem; }
   .btn { padding: 10px 16px; font-size: .88rem; }

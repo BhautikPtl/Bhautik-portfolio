@@ -97,7 +97,7 @@ const ProjectRow = ({ project, index }) => {
 
   return (
     <div
-      className="work-row reveal"
+      className="project-card reveal"
       style={{ transitionDelay: `${index * 0.06}s` }}
     >
       {project.image && (
@@ -105,16 +105,16 @@ const ProjectRow = ({ project, index }) => {
           src={getImageUrl(project.image)}
           alt={project.title}
           loading="lazy"
-          style={{ width: '100%', height: 150, objectFit: 'cover', borderRadius: 12, marginBottom: 12 }}
+          className="project-card-image"
         />
       )}
-      <div style={{ flex: 1, minWidth: 0 }}>
+      <div className="project-card-content">
         <div className="work-name">{project.title}</div>
         <span className="work-url">
           {techStack.slice(0, 3).join(' · ')}
         </span>
       </div>
-      <div style={{ display: 'flex', gap: 10, alignItems: 'center', flexShrink: 0 }}>
+      <div className="project-card-actions">
         {project.githubLink && (
           <a
             href={project.githubLink}
