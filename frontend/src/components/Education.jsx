@@ -45,9 +45,14 @@ const Education = () => {
       org: 'MERN Stack, Software Engineering',
     },
     {
-      when: 'Sem 5 — Current',
+      when: 'Sem 5 — 9.27 SGPA ',
       title: 'Advanced Web',
       org: 'React and Advanced Javascript',
+    },
+    {
+      when: 'Sem 6 — Current',
+      title: 'Advanced Backend',
+      org: 'Redis and Vartical And Horizontal Sscaling',
     },
   ];
 
@@ -55,7 +60,7 @@ const Education = () => {
     'BCA Graduate (In Progress)',
     'MERN Stack Specialist',
     'Full Stack Architect',
-    
+
   ];
 
   return (
